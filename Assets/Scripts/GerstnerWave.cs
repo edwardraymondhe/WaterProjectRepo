@@ -2,7 +2,7 @@
 
 namespace MyWaterSystem
 {
-    public class GernsterWave : MonoBehaviour
+    public class GerstnerWave : MonoBehaviour
     {
         
     }

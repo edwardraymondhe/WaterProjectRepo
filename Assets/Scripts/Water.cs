@@ -38,13 +38,16 @@ namespace MyWaterSystem
         [SerializeField] private WaterResourcesData resources;
 
 
+        private static readonly int shader_WaveHeight = Shader.PropertyToID("_WaveHeight");
+        private static readonly int shader_MaxWaveHeight = Shader.PropertyToID("_MaxWaveHeight");
+        private static readonly int shader_WaveCount = Shader.PropertyToID("_WaveCount");
         private static readonly int shader_WaveData = Shader.PropertyToID("waveData");
 
         private void OnEnable()
         {
             Init();
             RenderPipelineManager.beginCameraRendering += BeginCameraRendering;
-            
+
             if (resources == null)
             {
                 resources = Resources.Load("WaterResoucesData") as WaterResourcesData;
@@ -117,7 +120,7 @@ namespace MyWaterSystem
 
         private void LateUpdate()
         {
-            //GerstnerWavesJobs.UpdateHeights();
+            
         }
 
         private void SetWaves()
@@ -133,7 +136,10 @@ namespace MyWaterSystem
             _maxWaveHeight /= _waves.Length;
 
             _waveHeight = transform.position.y;
-            Shader.DisableKeyword("USE_STRUCTURED_BUFFER");
+            
+            Shader.SetGlobalInt(shader_WaveCount, _waves.Length);
+            Shader.SetGlobalFloat(shader_WaveHeight, _waveHeight);
+            Shader.SetGlobalFloat(shader_MaxWaveHeight, _maxWaveHeight);
             Shader.SetGlobalVectorArray(shader_WaveData, GetWaveData());
         }
 

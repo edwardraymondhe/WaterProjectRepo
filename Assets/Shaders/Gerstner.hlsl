@@ -1,6 +1,8 @@
 #ifndef GERSTNER_WAVES_INCLUDED
 #define GERSTNER_WAVES_INCLUDED
 
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
 uniform uint _WaveCount;
 
 struct Wave
@@ -65,23 +67,19 @@ inline void SampleWaves(float3 position, half opacity, out WaveStruct waveOut)
     waveOut.normal = 0;
     half waveCountMulti = 1.0 / _WaveCount;
     half3 opacityMask = saturate(half3(3, 3, 1) * opacity);
-    
+
     UNITY_LOOP
-    for(uint i = 0; i < _WaveCount; i++)
+    for (uint i = 0; i < _WaveCount; i++)
     {
-        #if defined(USE_STRUCTURED_BUFFER)
-        Wave w = _WaveDataBuffer[i];
-        #else
         Wave w;
         w.amplitude = waveData[i].x;
         w.direction = waveData[i].y;
         w.wavelength = waveData[i].z;
-        #endif
         WaveStruct wave = GerstnerWave(pos,
-                                waveCountMulti,
-                                w.amplitude,
-                                w.direction,
-                                w.wavelength,); // calculate the wave
+                                       waveCountMulti,
+                                       w.amplitude,
+                                       w.direction,
+                                       w.wavelength); // calculate the wave
 
         waveOut.position += wave.position; // add the position
         waveOut.normal += wave.normal; // add the normal

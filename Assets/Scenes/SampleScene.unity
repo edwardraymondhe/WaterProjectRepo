@@ -401,23 +401,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _waves:
-  - amplitude: 0.701152
-    direction: 106.22566
+  - amplitude: 0.93486935
+    direction: 61.225662
     wavelength: 2.7429316
-  - amplitude: 1.1880069
-    direction: 23.92044
+  - amplitude: 1.5840092
+    direction: -21.07956
     wavelength: 3.2668126
-  - amplitude: 1.005508
-    direction: 103.05429
+  - amplitude: 1.3406773
+    direction: 58.05429
     wavelength: 3.0453277
-  - amplitude: 1.548553
-    direction: 67.21166
+  - amplitude: 2.0647373
+    direction: 22.211662
     wavelength: 5.147145
-  - amplitude: 1.5568295
-    direction: 18.688784
+  - amplitude: 2.0757728
+    direction: -26.311216
     wavelength: 7.8800645
-  - amplitude: 1.8099016
-    direction: -16.49971
+  - amplitude: 2.4132023
+    direction: -61.49971
     wavelength: 7.121061
   waveData: {fileID: 11400000, guid: bfa6a89f8883160479e2d62355afc9a8, type: 2}
   resources: {fileID: 11400000, guid: 25d5a22342fbba046b0607266b31506a, type: 2}
