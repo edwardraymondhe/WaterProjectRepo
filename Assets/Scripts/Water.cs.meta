@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 6884eec5395c7614e83358266b8173c7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - waveData: {fileID: 11400000, guid: bfa6a89f8883160479e2d62355afc9a8, type: 2}
+  - resources: {fileID: 11400000, guid: 25d5a22342fbba046b0607266b31506a, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
