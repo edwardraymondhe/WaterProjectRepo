@@ -60,7 +60,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Data\WaterResourcesData.cs" />
      <Compile Include="Assets\Scripts\Data\WaterWaveData.cs" />
-     <Compile Include="Assets\Scripts\GerstnerWave.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
      <None Include="Assets\Shaders\Water.shader" />
