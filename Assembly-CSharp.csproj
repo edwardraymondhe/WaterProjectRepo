@@ -60,12 +60,30 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Data\WaterResourcesData.cs" />
      <Compile Include="Assets\Scripts\Data\WaterWaveData.cs" />
+     <Compile Include="Assets\Scripts\Effects\LodLightmaps.cs" />
+     <Compile Include="Assets\Scripts\FFTOcean.cs" />
+     <Compile Include="Assets\Scripts\FPSDisplay.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
+     <None Include="Assets\Shaders\UI\UIPanelFade.shader" />
      <None Include="Assets\Shaders\Water.shader" />
+     <None Include="Assets\Shaders\Ocean.shader" />
+     <None Include="Assets\Shaders\ShowMainTex.shader" />
+     <None Include="Assets\Shaders\BasicAO.shader" />
+     <None Include="Assets\Shaders\Vegetation\Vegetation.hlsl" />
+     <None Include="Assets\Shaders\Skybox-Procedural-Universal.shader" />
+     <None Include="Assets\Shaders\Vegetation\LODCrossfade.hlsl" />
      <None Include="Assets\Shaders\Gerstner.hlsl" />
+     <None Include="Assets\Shaders\UI\NewUnlitShader.shader" />
      <None Include="Assets\Shaders\WaterCommon.hlsl" />
+     <None Include="Assets\Shaders\Vegetation\LWVegetationShader.shader" />
+     <None Include="Assets\Shaders\FFTCS.compute" />
+     <None Include="Assets\Shaders\Vegetation\ShadowPassVegetation.hlsl" />
+     <None Include="Assets\Shaders\CustomLighting.hlsl" />
+     <None Include="Assets\Shaders\Vegetation\InputSurfaceVegetation.hlsl" />
      <None Include="Assets\Shaders\WaterInput.hlsl" />
+     <None Include="Assets\Shaders\Blocker.shader" />
+     <None Include="Assets\Shaders\HeightFog.hlsl" />
  <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
  <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
  </Reference>

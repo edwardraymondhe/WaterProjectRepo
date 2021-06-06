@@ -29,7 +29,6 @@ namespace MyWaterSystem
         }
 
         [SerializeField] public Wave[] _waves;
-        [SerializeField] private ComputeBuffer waveBuffer;
         private float _maxWaveHeight;
         private float _waveHeight;
 
