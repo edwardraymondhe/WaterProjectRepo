@@ -5,7 +5,7 @@
 
 #include "Gerstner.hlsl"
 #include "WaterInput.hlsl"
-
+#include "WaterReflection.hlsl"
 ///////////////////////////////////////////////////////////////////////////////
 //                  				Structs		                             //
 ///////////////////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@ WaterVertexOutput WaveVertexOperations(WaterVertexOutput input)
     //half waterDepth = WaterTextureDepth(input.posWS);
     half waterDepth = 0.5;
     input.posWS.y += pow(saturate((-waterDepth + 1.5) * 0.4), 2);
-    input.shadowCoord = ComputeScreenPos(input.clipPos);
+    
     //Gerstner here
     WaveStruct wave;
     SampleWaves(input.posWS, saturate((waterDepth * 0.1 + 0.05)), wave);
@@ -80,8 +80,9 @@ WaterVertexOutput WaveVertexOperations(WaterVertexOutput input)
 
     // After waves
     input.clipPos = TransformWorldToHClip(input.posWS);
-    input.viewDir = SafeNormalize(_WorldSpaceCameraPos - input.posWS);
-
+    input.shadowCoord = ComputeScreenPos(input.clipPos);
+    input.viewDir = SafeNormalize(_WorldSpaceCameraPos - input.posWS);    
+    
     // Additional data
     input.additionalData = AdditionalData(input.posWS, wave);
 
@@ -108,6 +109,7 @@ WaterVertexOutput WaterVertex(WaterVertexInput v)
     o.posWS = TransformObjectToWorld(v.vertex.xyz);
 
     o = WaveVertexOperations(o);
+
     return o;
 }
 
@@ -115,9 +117,16 @@ WaterVertexOutput WaterVertex(WaterVertexInput v)
 half4 WaterFragment(WaterVertexOutput IN) : SV_Target
 {
     UNITY_SETUP_INSTANCE_ID(IN);
-    half3 pos = IN.normal;
+    //half3 pos = IN.normal;
+    half3 screenUV = IN.shadowCoord.xyz / IN.shadowCoord.w;
 
-    return half4(pos, 1);
+    half fresnelTerm = FresnelTerm(IN.normal, IN.viewDir.xyz);
+    half3 reflection = SampleReflections(IN.normal, screenUV.xy, fresnelTerm, 0.0);
+    reflection = SAMPLE_TEXTURE2D(_PlanarReflectionTexture, sampler_ScreenTextures_linear_clamp, screenUV).rgb;
+    // reflection = reflection;
+    //reflection = clamp(reflection + spec, 0, 1024) * depthEdge;
+
+    return half4(reflection, 1);
 }
 
 #endif // WATER_COMMON_INCLUDED

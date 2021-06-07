@@ -6,6 +6,7 @@ using UnityEngine.Experimental.Rendering;
 using UnityEngine.Rendering.Universal;
 using MyWaterSystem.Data;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -37,15 +38,33 @@ namespace MyWaterSystem
         [SerializeField] private WaterResourcesData resources;
 
 
+        private Reflection reflection;
+
+        public float reflection_scaleValue = 0.33f;
+        public float reflection_clipPlaneOffset = 0.24f;
+        public LayerMask reflection_reflectLayers = -1;
+
         private static readonly int shader_WaveHeight = Shader.PropertyToID("_WaveHeight");
         private static readonly int shader_MaxWaveHeight = Shader.PropertyToID("_MaxWaveHeight");
         private static readonly int shader_WaveCount = Shader.PropertyToID("_WaveCount");
-        private static readonly int shader_WaveData = Shader.PropertyToID("waveData");
+        private static readonly int shader_WaveData = Shader.PropertyToID("_waveData");
 
         private void OnEnable()
         {
             Init();
+
             RenderPipelineManager.beginCameraRendering += BeginCameraRendering;
+
+            if (!gameObject.TryGetComponent(out reflection))
+            {
+                reflection = gameObject.AddComponent<Reflection>();
+            }
+
+            reflection.hideFlags = HideFlags.HideAndDontSave | HideFlags.HideInInspector;
+            reflection.reflectLayers = reflection_reflectLayers;
+            reflection.scaleValue = reflection_scaleValue;
+            reflection.clipPlaneOffset = reflection_clipPlaneOffset;
+            reflection.enabled = true;
 
             if (resources == null)
             {
@@ -68,22 +87,22 @@ namespace MyWaterSystem
             Debug.Log($"Beginning rendering the camera: {cam.name}");
             if (cam.cameraType == CameraType.Preview) return;
 
-            var roll = cam.transform.localEulerAngles.z;
+            float roll = cam.transform.localEulerAngles.z;
             // Water matrix
             const float quantizeValue = 6.25f;
             const float forwards = 10f;
             const float yOffset = -0.25f;
 
-            var newPos = cam.transform.TransformPoint(Vector3.forward * forwards);
+            Vector3 newPos = cam.transform.TransformPoint(Vector3.forward * forwards);
             newPos.y = yOffset;
             newPos.x = quantizeValue * (int) (newPos.x / quantizeValue);
             newPos.z = quantizeValue * (int) (newPos.z / quantizeValue);
 
-            var matrix =
+            Matrix4x4 matrix =
                 Matrix4x4.TRS(newPos + transform.position, Quaternion.identity,
                     Vector3.one); // transform.localToWorldMatrix;
 
-            foreach (var mesh in resources.defaultWaterMeshes)
+            foreach (Mesh mesh in resources.defaultWaterMeshes)
             {
                 Graphics.DrawMesh(mesh,
                     matrix,
@@ -119,7 +138,6 @@ namespace MyWaterSystem
 
         private void LateUpdate()
         {
-            
         }
 
         private void SetWaves()
@@ -127,7 +145,7 @@ namespace MyWaterSystem
             SetupWaves();
 
             _maxWaveHeight = 0f;
-            foreach (var w in _waves)
+            foreach (Wave w in _waves)
             {
                 _maxWaveHeight += w.amplitude;
             }
@@ -135,7 +153,7 @@ namespace MyWaterSystem
             _maxWaveHeight /= _waves.Length;
 
             _waveHeight = transform.position.y;
-            
+
             Shader.SetGlobalInt(shader_WaveCount, _waves.Length);
             Shader.SetGlobalFloat(shader_WaveHeight, _waveHeight);
             Shader.SetGlobalFloat(shader_MaxWaveHeight, _maxWaveHeight);
@@ -144,8 +162,8 @@ namespace MyWaterSystem
 
         private Vector4[] GetWaveData()
         {
-            var waveData = new Vector4[20];
-            for (var i = 0; i < _waves.Length; i++)
+            Vector4[] waveData = new Vector4[20];
+            for (int i = 0; i < _waves.Length; i++)
             {
                 waveData[i] = new Vector4(_waves[i].amplitude, _waves[i].direction, _waves[i].wavelength, 0);
             }
@@ -156,23 +174,23 @@ namespace MyWaterSystem
         private void SetupWaves()
         {
             //create basic waves based off basic wave settings
-            var backupSeed = Random.state;
+            Random.State backupSeed = Random.state;
             Random.InitState(waveData.randomSeed);
-            var basicWaves = waveData._basicWaveSettings;
-            var a = basicWaves.amplitude;
-            var d = basicWaves.direction;
-            var l = basicWaves.wavelength;
-            var numWave = basicWaves.numWaves;
+            BasicWaves basicWaves = waveData._basicWaveSettings;
+            float a = basicWaves.amplitude;
+            float d = basicWaves.direction;
+            float l = basicWaves.wavelength;
+            int numWave = basicWaves.numWaves;
             _waves = new Wave[numWave];
 
-            var r = 1f / numWave;
+            float r = 1f / numWave;
 
-            for (var i = 0; i < numWave; i++)
+            for (int i = 0; i < numWave; i++)
             {
-                var p = Mathf.Lerp(0.5f, 1.5f, i * r);
-                var amp = a * p * Random.Range(0.8f, 1.2f);
-                var dir = d + Random.Range(-90f, 90f);
-                var len = l * p * Random.Range(0.6f, 1.4f);
+                float p = Mathf.Lerp(0.5f, 1.5f, i * r);
+                float amp = a * p * Random.Range(0.8f, 1.2f);
+                float dir = d + Random.Range(-90f, 90f);
+                float len = l * p * Random.Range(0.6f, 1.4f);
                 _waves[i] = new Wave(amp, dir, len);
                 Random.InitState(waveData.randomSeed + i + 1);
             }

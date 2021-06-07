@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Effects\LodLightmaps.cs" />
      <Compile Include="Assets\Scripts\FFTOcean.cs" />
      <Compile Include="Assets\Scripts\FPSDisplay.cs" />
+     <Compile Include="Assets\Scripts\Reflection.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
      <None Include="Assets\Shaders\UI\UIPanelFade.shader" />
@@ -74,6 +75,7 @@
      <None Include="Assets\Shaders\Skybox-Procedural-Universal.shader" />
      <None Include="Assets\Shaders\Vegetation\LODCrossfade.hlsl" />
      <None Include="Assets\Shaders\Gerstner.hlsl" />
+     <None Include="Assets\Shaders\WaterReflection.hlsl" />
      <None Include="Assets\Shaders\UI\NewUnlitShader.shader" />
      <None Include="Assets\Shaders\WaterCommon.hlsl" />
      <None Include="Assets\Shaders\Vegetation\LWVegetationShader.shader" />
