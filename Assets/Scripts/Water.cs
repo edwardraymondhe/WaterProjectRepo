@@ -47,7 +47,7 @@ namespace MyWaterSystem
         private static readonly int shader_WaveHeight = Shader.PropertyToID("_WaveHeight");
         private static readonly int shader_MaxWaveHeight = Shader.PropertyToID("_MaxWaveHeight");
         private static readonly int shader_WaveCount = Shader.PropertyToID("_WaveCount");
-        private static readonly int shader_WaveData = Shader.PropertyToID("_waveData");
+        private static readonly int shader_WaveData = Shader.PropertyToID("waveData");
 
         private void OnEnable()
         {
