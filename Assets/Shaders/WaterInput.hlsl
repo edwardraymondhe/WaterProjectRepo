@@ -8,7 +8,6 @@ half _BumpScale;
 half4 _BumpMap_TexelSize;
 CBUFFER_END
 
-
 half _Visibility;
 half _MaxWaveHeight;
 int _DebugPass;
