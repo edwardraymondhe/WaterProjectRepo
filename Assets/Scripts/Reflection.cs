@@ -106,23 +106,23 @@ namespace MyWaterSystem
 
             // Render reflection
             // Reflect camera around reflection plane
-            var d = -Vector3.Dot(normal, pos) - clipPlaneOffset;
-            var reflectionPlane = new Vector4(normal.x, normal.y, normal.z, d);
+            float d = -Vector3.Dot(normal, pos) - clipPlaneOffset;
+            Vector4 reflectionPlane = new Vector4(normal.x, normal.y, normal.z, d);
 
-            var reflection = Matrix4x4.identity;
+            Matrix4x4 reflection = Matrix4x4.identity;
             reflection *= Matrix4x4.Scale(new Vector3(1, -1, 1));
 
             CalculateReflectionMatrix(ref reflection, reflectionPlane);
-            var oldPosition = realCamera.transform.position - new Vector3(0, pos.y * 2, 0);
-            var newPosition = ReflectPosition(oldPosition);
+            Vector3 oldPosition = realCamera.transform.position - new Vector3(0, pos.y * 2, 0);
+            Vector3 newPosition = ReflectPosition(oldPosition);
             reflectionCamera.transform.forward = Vector3.Scale(realCamera.transform.forward, new Vector3(1, -1, 1));
             reflectionCamera.worldToCameraMatrix = realCamera.worldToCameraMatrix * reflection;
 
             // Setup oblique projection matrix so that near plane is our reflection
             // plane. This way we clip everything below/above it for free.
             
-            var clipPlane = CameraSpacePlane(reflectionCamera, pos - Vector3.up * 0.1f, normal, 1.0f);
-            var projection = realCamera.CalculateObliqueMatrix(clipPlane);
+            Vector4 clipPlane = CameraSpacePlane(reflectionCamera, pos - Vector3.up * 0.1f, normal, 1.0f);
+            Matrix4x4 projection = realCamera.CalculateObliqueMatrix(clipPlane);
             reflectionCamera.projectionMatrix = projection;
             reflectionCamera.cullingMask = reflectLayers; // never render water layer
             reflectionCamera.transform.position = newPosition;
@@ -152,7 +152,7 @@ namespace MyWaterSystem
         {
             if (reflectionTexture == null)
             {
-                var res = ReflectionResolution(cam, UniversalRenderPipeline.asset.renderScale);
+                int2 res = ReflectionResolution(cam, UniversalRenderPipeline.asset.renderScale);
                 const RenderTextureFormat hdrFormat = RenderTextureFormat.RGB111110Float;
                 reflectionTexture = RenderTexture.GetTemporary(res.x, res.y, 16,
                     GraphicsFormatUtility.GetGraphicsFormat(hdrFormat, true));
@@ -163,10 +163,10 @@ namespace MyWaterSystem
 
         private Vector4 CameraSpacePlane(Camera cam, Vector3 pos, Vector3 normal, float sideSign)
         {
-            var offsetPos = pos + normal * clipPlaneOffset;
-            var m = cam.worldToCameraMatrix;
-            var cameraPosition = m.MultiplyPoint(offsetPos);
-            var cameraNormal = m.MultiplyVector(normal).normalized * sideSign;
+            Vector3 offsetPos = pos + normal * clipPlaneOffset;
+            Matrix4x4 m = cam.worldToCameraMatrix;
+            Vector3 cameraPosition = m.MultiplyPoint(offsetPos);
+            Vector3 cameraNormal = m.MultiplyVector(normal).normalized * sideSign;
             return new Vector4(cameraNormal.x, cameraNormal.y, cameraNormal.z, -Vector3.Dot(cameraPosition, cameraNormal));
         }
         
@@ -195,14 +195,14 @@ namespace MyWaterSystem
         
         private int2 ReflectionResolution(Camera cam, float scale)
         {
-            var x = (int)(cam.pixelWidth * scale * scaleValue);
-            var y = (int)(cam.pixelHeight * scale * scaleValue);
+            int x = (int)(cam.pixelWidth * scale * scaleValue);
+            int y = (int)(cam.pixelHeight * scale * scaleValue);
             return new int2(x, y);
         }
         
         private static Vector3 ReflectPosition(Vector3 pos)
         {
-            var newPos = new Vector3(pos.x, -pos.y, pos.z);
+            Vector3 newPos = new Vector3(pos.x, -pos.y, pos.z);
             return newPos;
         }
     }

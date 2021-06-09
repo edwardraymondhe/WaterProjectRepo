@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02aa3be49aa14c8ead8b84a989e9836e, type: 3}
   m_Name: WaterResoucesData
   m_EditorClassIdentifier: 
+  defaultFoamRamp: {fileID: 2800000, guid: 4098762bce32f44b9b7c56531d1a988e, type: 3}
+  defaultFoamMap: {fileID: 2800000, guid: ca439406e806ecf44a9586510be9477d, type: 3}
   defaultSurfaceMap: {fileID: 2800000, guid: f395b7d64f44848c6a3cba1f1173fe90, type: 3}
   defaultSeaMaterial: {fileID: 2100000, guid: 210df8f77015bbf4e80459930f185ce5, type: 2}
   defaultWaterMeshes:

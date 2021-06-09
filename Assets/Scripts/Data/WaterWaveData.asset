@@ -16,7 +16,7 @@ MonoBehaviour:
   randomSeed: 3234
   _basicWaveSettings:
     numWaves: 6
-    amplitude: 1
+    amplitude: 0.8
     direction: 0
     wavelength: 5
   _init: 0

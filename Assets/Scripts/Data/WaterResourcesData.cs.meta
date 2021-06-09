@@ -1,3 +1,16 @@
-﻿fileFormatVersion: 2
+fileFormatVersion: 2
 guid: 02aa3be49aa14c8ead8b84a989e9836e
-timeCreated: 1622622055
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - defaultFoamRamp: {instanceID: 0}
+  - defaultFoamMap: {instanceID: 0}
+  - defaultSurfaceMap: {instanceID: 0}
+  - defaultSeaMaterial: {fileID: 2100000, guid: 210df8f77015bbf4e80459930f185ce5,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

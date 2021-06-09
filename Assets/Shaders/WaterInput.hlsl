@@ -5,9 +5,11 @@
 
 CBUFFER_START(UnityPerMaterial)
 half _BumpScale;
-half4 _DitherPattern_TexelSize;
+half4 _BumpMap_TexelSize;
 CBUFFER_END
-half _MaxDepth;
+
+
+half _Visibility;
 half _MaxWaveHeight;
 int _DebugPass;
 half4 _VeraslWater_DepthCamParams;
@@ -24,10 +26,10 @@ TEXTURE2D(_CameraOpaqueTexture); SAMPLER(sampler_CameraOpaqueTexture_linear_clam
 TEXTURE2D(_WaterDepthMap); SAMPLER(sampler_WaterDepthMap_linear_clamp);
 
 // Surface textures
-TEXTURE2D(_AbsorptionScatteringRamp); SAMPLER(sampler_AbsorptionScatteringRamp);
+TEXTURE2D(_ScatteringRamp); SAMPLER(sampler_ScatteringRamp);
 TEXTURE2D(_SurfaceMap); SAMPLER(sampler_SurfaceMap);
 TEXTURE2D(_FoamMap); SAMPLER(sampler_FoamMap);
-TEXTURE2D(_DitherPattern); SAMPLER(sampler_DitherPattern);
+TEXTURE2D(_BumpMap); SAMPLER(sampler_BumpMap);
 
 // Must match Lightweigth ShaderGraph master node
 struct SurfaceData

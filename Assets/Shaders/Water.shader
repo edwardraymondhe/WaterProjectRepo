@@ -2,7 +2,8 @@
 {
 	Properties
 	{
-		
+		_BumpScale("Bump Scale", Range(0, 2)) = 0.2
+		_BumpMap ("Bump map", 2D) = "bump" {}
 	}
 	SubShader
 	{

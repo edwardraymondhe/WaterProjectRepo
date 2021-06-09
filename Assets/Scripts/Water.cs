@@ -39,15 +39,25 @@ namespace MyWaterSystem
 
 
         private Reflection reflection;
-
+        private Depth depth;
+        public float depth_visibility;
+        
+        public Gradient depth_absorptionRamp;
+        public Gradient depth_scatterRamp;
+        
         public float reflection_scaleValue = 0.33f;
         public float reflection_clipPlaneOffset = 0.24f;
         public LayerMask reflection_reflectLayers = -1;
-
+        
+        
+        
+        
         private static readonly int shader_WaveHeight = Shader.PropertyToID("_WaveHeight");
         private static readonly int shader_MaxWaveHeight = Shader.PropertyToID("_MaxWaveHeight");
         private static readonly int shader_WaveCount = Shader.PropertyToID("_WaveCount");
         private static readonly int shader_WaveData = Shader.PropertyToID("waveData");
+        private static readonly int shader_Visibility = Shader.PropertyToID("_Visibility");
+        
 
         private void OnEnable()
         {
@@ -55,23 +65,51 @@ namespace MyWaterSystem
 
             RenderPipelineManager.beginCameraRendering += BeginCameraRendering;
 
+            EnableReflection();
+            
+            Invoke("EnableDepth", 1.0f);
+            
+            if (resources == null)
+            {
+                resources = Resources.Load("WaterResoucesData") as WaterResourcesData;
+            }
+
+            
+        }
+
+        private void EnableReflection()
+        {
             if (!gameObject.TryGetComponent(out reflection))
             {
                 reflection = gameObject.AddComponent<Reflection>();
             }
 
-            reflection.hideFlags = HideFlags.HideAndDontSave | HideFlags.HideInInspector;
+            reflection.hideFlags = HideFlags.HideAndDontSave;
             reflection.reflectLayers = reflection_reflectLayers;
             reflection.scaleValue = reflection_scaleValue;
             reflection.clipPlaneOffset = reflection_clipPlaneOffset;
             reflection.enabled = true;
-
-            if (resources == null)
-            {
-                resources = Resources.Load("WaterResoucesData") as WaterResourcesData;
-            }
         }
 
+        private void EnableDepth()
+        {
+            if (!gameObject.TryGetComponent(out depth))
+            {
+                depth = gameObject.AddComponent<Depth>();
+            }
+
+            depth.enabled = true;
+            reflection.hideFlags = HideFlags.HideAndDontSave;
+            depth.visibility = depth_visibility;
+            depth.scatterRamp = depth_scatterRamp;
+            depth.absorptionRamp = depth_absorptionRamp;
+            depth.foam = new AnimationCurve(new Keyframe[2]{new Keyframe(0.25f, 0f),
+                new Keyframe(1f, 1f)});
+            depth.foamRamp = resources.defaultFoamRamp;
+            depth.CaptureDepthMap();
+            depth.CaptureColorRamp();
+        }
+        
         private void OnDisable()
         {
             Cleanup();
@@ -134,6 +172,7 @@ namespace MyWaterSystem
             {
                 resources = Resources.Load("WaterResourcesData") as WaterResourcesData;
             }
+            
         }
 
         private void LateUpdate()
@@ -157,6 +196,7 @@ namespace MyWaterSystem
             Shader.SetGlobalInt(shader_WaveCount, _waves.Length);
             Shader.SetGlobalFloat(shader_WaveHeight, _waveHeight);
             Shader.SetGlobalFloat(shader_MaxWaveHeight, _maxWaveHeight);
+            Shader.SetGlobalFloat(shader_Visibility,depth_visibility);
             Shader.SetGlobalVectorArray(shader_WaveData, GetWaveData());
         }
 
@@ -197,5 +237,7 @@ namespace MyWaterSystem
 
             Random.state = backupSeed;
         }
+        
+       
     }
 }

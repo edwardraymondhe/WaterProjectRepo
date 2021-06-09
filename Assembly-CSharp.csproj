@@ -12,7 +12,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{C8840FC1-09FD-3B58-CEEF-0BE1A32A1A3E}</ProjectGuid>
+    <ProjectGuid>{8C0A5739-8A1C-3BCD-5826-CD7AB854FDB8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,6 +60,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Data\WaterResourcesData.cs" />
      <Compile Include="Assets\Scripts\Data\WaterWaveData.cs" />
+     <Compile Include="Assets\Scripts\Depth.cs" />
      <Compile Include="Assets\Scripts\Effects\LodLightmaps.cs" />
      <Compile Include="Assets\Scripts\FFTOcean.cs" />
      <Compile Include="Assets\Scripts\FPSDisplay.cs" />
@@ -87,64 +88,64 @@
      <None Include="Assets\Shaders\Blocker.shader" />
      <None Include="Assets\Shaders\HeightFog.hlsl" />
  <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Universal.Shaders">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.Editor">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.Runtime">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Universal.Runtime">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Universal.Editor">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Mathematics">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
  </Reference>
  <Reference Include="Unity.ShaderGraph.Editor">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Mathematics.Editor">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/YTR/My/Repository/WaterProjectRepo/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>C:/YTR/My/Repository/WaterProjectRepo-main/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/YTR/Softwares/Unity/2019.4.22f1c1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
