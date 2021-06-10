@@ -29,12 +29,12 @@ namespace MyWaterSystem
             }
         }
 
-        [SerializeField] public Wave[] _waves;
+        public Wave[] _waves;
         private float _maxWaveHeight;
         private float _waveHeight;
 
 
-        [SerializeField] public WaterWaveData waveData;
+        public WaterWaveData waveData;
         [SerializeField] private WaterResourcesData resources;
 
 
@@ -45,18 +45,21 @@ namespace MyWaterSystem
         public Gradient depth_absorptionRamp;
         public Gradient depth_scatterRamp;
         
+        public Gradient depth_absorptionRamp_backup;
+        public Gradient depth_scatterRamp_backup;
+        
         public float reflection_scaleValue = 0.33f;
         public float reflection_clipPlaneOffset = 0.24f;
         public LayerMask reflection_reflectLayers = -1;
-        
-        
-        
-        
+
         private static readonly int shader_WaveHeight = Shader.PropertyToID("_WaveHeight");
         private static readonly int shader_MaxWaveHeight = Shader.PropertyToID("_MaxWaveHeight");
         private static readonly int shader_WaveCount = Shader.PropertyToID("_WaveCount");
         private static readonly int shader_WaveData = Shader.PropertyToID("waveData");
         private static readonly int shader_Visibility = Shader.PropertyToID("_Visibility");
+        
+        private static readonly int shader_FoamMap = Shader.PropertyToID("_FoamMap");
+        private static readonly int shader_SurfaceMap = Shader.PropertyToID("_SurfaceMap");
         
 
         private void OnEnable()
@@ -168,11 +171,14 @@ namespace MyWaterSystem
         public void Init()
         {
             SetWaves();
+            
             if (resources == null)
             {
                 resources = Resources.Load("WaterResourcesData") as WaterResourcesData;
             }
             
+            Shader.SetGlobalTexture(shader_FoamMap, resources.defaultFoamMap);
+            Shader.SetGlobalTexture(shader_SurfaceMap, resources.defaultSurfaceMap);
         }
 
         private void LateUpdate()
@@ -181,7 +187,28 @@ namespace MyWaterSystem
 
         private void SetWaves()
         {
-            SetupWaves();
+            Random.State backupSeed = Random.state;
+            Random.InitState(waveData.randomSeed);
+            BasicWaves basicWaves = waveData._basicWaveSettings;
+            float a = basicWaves.amplitude;
+            float d = basicWaves.direction;
+            float l = basicWaves.wavelength;
+            int numWave = basicWaves.numWaves;
+            _waves = new Wave[numWave];
+
+            float r = 1f / numWave;
+
+            for (int i = 0; i < numWave; i++)
+            {
+                float p = Mathf.Lerp(0.5f, 1.5f, i * r);
+                float amp = a * p * Random.Range(0.8f, 1.2f);
+                float dir = d + Random.Range(-90f, 90f);
+                float len = l * p * Random.Range(0.6f, 1.4f);
+                _waves[i] = new Wave(amp, dir, len);
+                Random.InitState(waveData.randomSeed + i + 1);
+            }
+
+            Random.state = backupSeed;
 
             _maxWaveHeight = 0f;
             foreach (Wave w in _waves)
@@ -210,34 +237,5 @@ namespace MyWaterSystem
 
             return waveData;
         }
-
-        private void SetupWaves()
-        {
-            //create basic waves based off basic wave settings
-            Random.State backupSeed = Random.state;
-            Random.InitState(waveData.randomSeed);
-            BasicWaves basicWaves = waveData._basicWaveSettings;
-            float a = basicWaves.amplitude;
-            float d = basicWaves.direction;
-            float l = basicWaves.wavelength;
-            int numWave = basicWaves.numWaves;
-            _waves = new Wave[numWave];
-
-            float r = 1f / numWave;
-
-            for (int i = 0; i < numWave; i++)
-            {
-                float p = Mathf.Lerp(0.5f, 1.5f, i * r);
-                float amp = a * p * Random.Range(0.8f, 1.2f);
-                float dir = d + Random.Range(-90f, 90f);
-                float len = l * p * Random.Range(0.6f, 1.4f);
-                _waves[i] = new Wave(amp, dir, len);
-                Random.InitState(waveData.randomSeed + i + 1);
-            }
-
-            Random.state = backupSeed;
-        }
-        
-       
     }
 }

@@ -7,7 +7,7 @@ namespace MyWaterSystem
 {
     public class Depth : MonoBehaviour
     {
-        [SerializeField] public RenderTexture _depthTex;
+        public RenderTexture _depthTex;
         private Camera _depthCam;
         public float visibility;
         public Texture2D rampTexture;
@@ -18,8 +18,6 @@ namespace MyWaterSystem
         public Texture2D foamRamp;
         
         private static readonly int shader_WaterDepthMap = Shader.PropertyToID("_WaterDepthMap");
-        
-        private static readonly int shader_DepthCamParams = Shader.PropertyToID("_WaterDepthCamParams");
         private static readonly int shader_ScatteringRamp = Shader.PropertyToID("_ScatteringRamp");
         public void CaptureDepthMap()
         {
@@ -60,14 +58,10 @@ namespace MyWaterSystem
             _depthTex.filterMode = FilterMode.Point;
             _depthTex.wrapMode = TextureWrapMode.Clamp;
             _depthTex.name = "WaterDepthMap";
-            //do depth capture
             _depthCam.targetTexture = _depthTex;
             _depthCam.Render();
             Shader.SetGlobalTexture(shader_WaterDepthMap, _depthTex);
-            // set depth bufferParams for depth cam(since it doesnt exist and only temporary)
-            Vector4 _params = new Vector4(t.position.y, 250, 0, 0);
-            Shader.SetGlobalVector(shader_DepthCamParams, _params);
-
+            
             _depthCam.enabled = false;
             _depthCam.targetTexture = null;
         }

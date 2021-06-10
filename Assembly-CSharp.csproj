@@ -64,7 +64,6 @@
      <Compile Include="Assets\Scripts\Effects\LodLightmaps.cs" />
      <Compile Include="Assets\Scripts\FFTOcean.cs" />
      <Compile Include="Assets\Scripts\FPSDisplay.cs" />
-     <Compile Include="Assets\Scripts\Foam.cs" />
      <Compile Include="Assets\Scripts\Reflection.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />

@@ -11,7 +11,6 @@ CBUFFER_END
 half _Visibility;
 half _MaxWaveHeight;
 int _DebugPass;
-half4 _VeraslWater_DepthCamParams;
 float4x4 _InvViewProjection;
 
 // Screen Effects textures

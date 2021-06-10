@@ -7,9 +7,6 @@
 #include "WaterInput.hlsl"
 #include "WaterReflection.hlsl"
 #include "WaterUtilities.hlsl"
-///////////////////////////////////////////////////////////////////////////////
-//                  				Structs		                             //
-///////////////////////////////////////////////////////////////////////////////
 
 struct WaterVertexInput // vert struct
 {
@@ -34,24 +31,16 @@ struct WaterVertexOutput // fragment struct
     // SSS 计算系数
     float4 additionalData : TEXCOORD5;
     // waterattack: x = distance to surface, y = distance to surface, z = normalized wave height, w = horizontal movement
-    half2 fogFactorNoise : TEXCOORD6;
-    // waterattack: x = fogFactor y = Noise
     float4 clipPos : SV_POSITION;
 
     UNITY_VERTEX_INPUT_INSTANCE_ID
     UNITY_VERTEX_OUTPUT_STEREO
 };
 
-
-///////////////////////////////////////////////////////////////////////////////
-//                  		     	Utilities                                //
-///////////////////////////////////////////////////////////////////////////////
-
-
 float WaterTextureDepth(float3 posWS)
 {
     return (1 - SAMPLE_TEXTURE2D_LOD(_WaterDepthMap, sampler_WaterDepthMap_linear_clamp, posWS.xz * 0.002 + 0.5, 1).r) *
-        (_Visibility + _VeraslWater_DepthCamParams.x) - _VeraslWater_DepthCamParams.x;
+         _Visibility;
 }
 
 float3 WaterDepth(float3 posWS, half4 additionalData, half2 screenUVs) // x = seafloor depth, y = water depth
@@ -96,12 +85,12 @@ WaterVertexOutput WaveVertexOperations(WaterVertexOutput input)
 {
     float time = _Time.y;
     input.normal = float3(0, 1, 0);
-    input.fogFactorNoise.y = ((noise2D((input.posWS.xz * 0.5) + time) +
+    half detailNoise = ((noise2D((input.posWS.xz * 0.5) + time) +
         noise2D((input.posWS.xz * 1) + time)) * 0.25 - 0.5) + 1;
 
     // Detail UVs
-    input.uv.zw = input.posWS.xz * 0.1h + time * 0.05h + (input.fogFactorNoise.y * 0.1);
-    input.uv.xy = input.posWS.xz * 0.4h - time.xx * 0.1h + (input.fogFactorNoise.y * 0.2);
+    input.uv.zw = input.posWS.xz * 0.1h + time * 0.05h + (detailNoise * 0.1);
+    input.uv.xy = input.posWS.xz * 0.4h - time.xx * 0.1h + (detailNoise * 0.2);
 
     half4 screenUV = ComputeScreenPos(TransformWorldToHClip(input.posWS));
     screenUV.xyz /= screenUV.w;
@@ -168,15 +157,26 @@ half4 WaterFragment(WaterVertexOutput IN) : SV_Target
     half depthEdge = saturate(depth.y * 20 + 1);
     half depthMulti = 1 / _Visibility;;
 
+    // 白沫
+    half3 foamMap = SAMPLE_TEXTURE2D(_FoamMap, sampler_FoamMap,  IN.uv.zw).rgb;
+    //浪尖白沫
+    //half waveFoam = saturate((0.3+IN.posWS.y) / _MaxWaveHeight);
+    half waveFoam = 0;
+    //岸边白沫
+    half edgeFoam = saturate(0.75 - depth.x * 0.3) * depthEdge;
+    half foamBlendMask = max(waveFoam, edgeFoam);
+    half3 foamBlend = SAMPLE_TEXTURE2D(_ScatteringRamp, sampler_ScatteringRamp, half2(foamBlendMask, 0.66)).rgb;
+    half foamMask = saturate(length(foamMap * foamBlend) * 1.5 - 0.1 + saturate(1 - depth.x * 4) * 0.5);
+    half3 foam = foamMask.xxx * (mainLight.shadowAttenuation * half3(5,5,5) + SampleSH(IN.normal));
+
+    //扭曲效果
     half2 distortion = screenUV.xy + DistortionUVs(depth.x, IN.normal);
     float d = depth.x;
-
     depth.xz = CalculateDepthFromUV(distortion, IN.additionalData);
     distortion = depth.x < 0 ? screenUV.xy : distortion;
     depth.x = depth.x < 0 ? d : depth.x;
 
-    half fresnelTerm = FresnelTerm(IN.normal, IN.viewDir.xyz);
-
+    half fresnelTerm = FresnelTerm(IN.normal, IN.viewDir.xyz);    
     // 加入了BumpMap噪声后进行计算
     half2 r_UV = screenUV.xy * _ScreenParams.xy * _BumpMap_TexelSize.xy;
     float3 r_Texture = SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, r_UV).xyz * 2 - 1;
@@ -186,7 +186,7 @@ half4 WaterFragment(WaterVertexOutput IN) : SV_Target
     //阴影信息
     half shadow = r_mainLight.shadowAttenuation;
 
-    //使用surfaceMap对法向量进行扰动，从而产生更精细的波纹
+    //使用surfaceMap对法向量进行扰动，从而产生更精细的法线效果
     IN.normal = SurfaceNormal(IN.normal,IN.uv.xy,IN.uv.zw,depth.x);
 
     //计算高光
@@ -207,9 +207,15 @@ half4 WaterFragment(WaterVertexOutput IN) : SV_Target
     half3 diffuse = absorption + sss;
     half3 comp = lighting + diffuse;
 
+    
+
+    comp = lerp(comp, foam, foamMask);
+    
     //return half4(absorption, 1);
+    //return half4(foam, 1);
     //return half4(lighting, 1);
     //return half4(sss, 1);
+    //return half4(mainLight.color, 1);
     return half4(comp, 1);
 }
 
