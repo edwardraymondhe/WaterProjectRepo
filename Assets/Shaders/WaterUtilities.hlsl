@@ -60,6 +60,28 @@ float2 CalculateDepthFromUV(half2 uvs, half4 additionalData)
     return float2(d * additionalData.x - additionalData.y, (rawD * -_ProjectionParams.x) + (1 - UNITY_REVERSED_Z));
 }
 
+float2 CausticUVs(float2 rawUV, float2 offset)
+{
+    //anim
+    float2 uv = rawUV * _CausticsScale + float2(_Time.y, _Time.x) * 0.1;
+    return uv + offset * 0.25;
+}
 
+float3 WaterCaustics(float3 worldPos, float depth)
+{
+    float2 uv = worldPos.xz * 0.025 + _Time.x * 0.25;
+    float sampleHeight = (depth - worldPos.y) / 2;
+
+    half upperMask = saturate(sampleHeight);
+    half lowerMask = saturate(_BlendDistance * (1 - sampleHeight));
+
+    float waveOffset = SAMPLE_TEXTURE2D(_CausticMap, sampler_CausticMap, uv).w - 0.5;
+
+    float2 causticUV = CausticUVs(worldPos.xz, waveOffset);
+    float3 caustics = SAMPLE_TEXTURE2D_LOD(_CausticMap, sampler_CausticMap, causticUV,
+                                           abs(sampleHeight) * 5 / _BlendDistance).bbb;
+    caustics *= min(upperMask, lowerMask);
+    return caustics;
+}
 
 #endif // WATER_LIGHTING_INCLUDED

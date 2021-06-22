@@ -25,11 +25,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158139537015330486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5.95}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8220566396715735769}
   - {fileID: 8220566397253955261}
+  - {fileID: 8220566396715735769}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveLines:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8220566396715735768}
+  - {fileID: 8220566397253955260}
   wavePointSpawnSpan: 2
   currentCounter: 0
 --- !u!1001 &158139536248001023
@@ -60,17 +60,17 @@ PrefabInstance:
     - target: {fileID: 8080727149281069861, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
       propertyPath: m_Name
-      value: WaveLine (1)
+      value: WaveRight
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
@@ -80,7 +80,7 @@ PrefabInstance:
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
@@ -130,6 +130,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 158139536248001023}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8220566396715735768 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8080727149281069863, guid: 48f8f58f6857c37499cb9d4edc7592d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 158139536248001023}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666e16cb887c3284a999e39ef51ef719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &158139536786154907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -140,17 +152,17 @@ PrefabInstance:
     - target: {fileID: 8080727149281069861, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
       propertyPath: m_Name
-      value: WaveLine (2)
+      value: WaveLeft
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
@@ -160,7 +172,7 @@ PrefabInstance:
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
@@ -205,3 +217,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 158139536786154907}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8220566397253955260 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8080727149281069863, guid: 48f8f58f6857c37499cb9d4edc7592d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 158139536786154907}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 666e16cb887c3284a999e39ef51ef719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

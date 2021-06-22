@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 namespace MyWaterSystem
 {
@@ -236,6 +237,106 @@ namespace MyWaterSystem
             }
 
             return waveData;
+        }
+
+
+        public void SetBasicWaveDataWaveNum(Slider slider)
+        {
+            waveData.SetWaveNum((int)slider.value);
+        }
+        public void SetBasicWaveDataAmp(Slider slider)
+        {
+            waveData.SetAmp(slider.value);
+        }
+        public void SetBasicWaveDataDir(Slider slider)
+        {
+            waveData.SetDir(slider.value);
+        }
+        public void SetBasicWaveDataLen(Slider slider)
+        {
+            waveData.SetLen(slider.value);
+        }
+
+        public void ApplyWaveChanges()
+        {
+            SetWaves();
+        }
+
+        public Vector3 GetWaves(Vector3 position)
+        {
+            Vector2 pos = new Vector2(position.x, position.y);
+            int waveNum = _waves.Length;
+
+            Vector3 waveOut = Vector3.zero;
+
+            for (int i = 0; i < waveNum; i++)
+            {
+                float amplitude = _waves[i].amplitude;
+                float direction = _waves[i].direction;
+                float waveLength = _waves[i].wavelength;
+
+                float time = Time.time;
+
+                Vector3 wave = Vector3.zero; // wave vector
+                float w = 6.28318f / waveLength; // 2pi over wavelength(hardcoded)
+                float wSpeed = Mathf.Sqrt(9.8f * w); // frequency of the wave based off wavelength
+                float peak = 0.8f; // peak value, 1 is the sharpest peaks
+                float qi = peak / (amplitude * w * waveNum);
+
+                direction = (float)(Math.PI / 180.0f * direction); // convert the incoming degrees to radians, for directional waves
+                Vector2 dirWaveInput = new Vector2(Mathf.Sin(direction), Mathf.Cos(direction));
+
+                Vector2 windDir = dirWaveInput.normalized; // calculate wind direction
+                float dir = Vector2.Dot(windDir, pos); // calculate a gradient along the wind direction
+
+                ////////////////////////////position output calculations/////////////////////////
+                float calc = dir * w + -time * wSpeed; // the wave calculation
+                float cosCalc = Mathf.Cos(calc); // cosine version(used for horizontal undulation)
+                float sinCalc = Mathf.Sin(calc); // sin version(used for vertical undulation)
+
+                // calculate the offsets for the current point
+                wave.x = qi * amplitude * windDir.x * cosCalc;
+                wave.z = qi * amplitude * windDir.y * cosCalc;
+                wave.y = ((sinCalc * amplitude)) / waveNum; // the height is divided by the number of waves
+
+
+                float Amp = amplitude * 10000;
+                if (Amp >= 1)
+                    Amp = 1;
+                else if (Amp <= 0)
+                    Amp = 0;
+
+                waveOut += wave * Amp;
+            }
+
+            return waveOut + position;
+        }
+
+        public float GetWaveHeight(Vector3 position)
+        {
+            ArrayList waves = new ArrayList();
+            for (float x = position.x - 2.0f; x < position.x + 2.0f; x += 0.1f)
+            {
+                for (float z = position.y - 2.0f; x < position.y + 2.0f; z += 0.1f)
+                {
+                    waves.Add(GetWaves(new Vector3(x, z, position.z)));
+                }
+            }
+
+            float minDis = 9999f;
+            Vector3 nearest = new Vector3();
+
+            foreach (Vector3 pos in waves)
+            {
+                float dis = (pos - position).magnitude;
+                if (dis < minDis)
+                {
+                    minDis = dis;
+                    nearest = pos;
+                }
+            }
+
+            return nearest.y;
         }
     }
 }

@@ -6,6 +6,9 @@
 CBUFFER_START(UnityPerMaterial)
 half _BumpScale;
 half4 _BumpMap_TexelSize;
+half _CausticsScale;
+half _BlendDistance;
+
 CBUFFER_END
 
 half _Visibility;
@@ -17,7 +20,7 @@ float4x4 _InvViewProjection;
 SAMPLER(sampler_ScreenTextures_linear_clamp);
 
 TEXTURE2D(_PlanarReflectionTexture);
-TEXTURE2D(_WaterFXMap);
+TEXTURE2D(_WakeMap);
 TEXTURE2D(_CameraDepthTexture);
 TEXTURE2D(_CameraOpaqueTexture); SAMPLER(sampler_CameraOpaqueTexture_linear_clamp);
 
@@ -28,6 +31,7 @@ TEXTURE2D(_ScatteringRamp); SAMPLER(sampler_ScatteringRamp);
 TEXTURE2D(_SurfaceMap); SAMPLER(sampler_SurfaceMap);
 TEXTURE2D(_FoamMap); SAMPLER(sampler_FoamMap);
 TEXTURE2D(_BumpMap); SAMPLER(sampler_BumpMap);
+TEXTURE2D(_CausticMap); SAMPLER(sampler_CausticMap);
 
 // Must match Lightweigth ShaderGraph master node
 struct SurfaceData

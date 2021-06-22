@@ -24,6 +24,8 @@ public class WaveLine : MonoBehaviour{
     public int wavePointCount = 0;
     public float wavePointDirection = 1.0f;
     public GameObject wavePointOrigin;
+    public float waveSpeed = 1.0f;
+    public float waveWidth = 0.4f;
 
     private void Start() {
         lineRenderer = GetComponent<LineRenderer>();
@@ -40,7 +42,7 @@ public class WaveLine : MonoBehaviour{
                 wavePoints.RemoveAt(i);
             }else{
                 wavePoint.aliveTime += Time.deltaTime;
-                wavePoint.position += (1.0f - wavePoint.aliveTime / wavePointLifeTime )* Time.deltaTime * wavePoint.direction;
+                wavePoint.position += waveSpeed * (1.0f - wavePoint.aliveTime / wavePointLifeTime ) * Time.deltaTime * wavePoint.direction;
             }
         }
         wavePointCount = wavePoints.Count;
@@ -49,7 +51,15 @@ public class WaveLine : MonoBehaviour{
         lineRenderer.positionCount = wavePointCount + 1;
         lineRenderer.SetPosition(0, wavePointOrigin.transform.position);
         for (int i = 0; i < wavePointCount; i++)
-            lineRenderer.SetPosition(i + 1, wavePoints[i].position);
+        {
+            Vector3 pos = wavePoints[i].position;
+
+            // Vector3 pos1 = pos - waveWidth * wavePoints[i].direction;
+            // Vector3 pos2 = pos + waveWidth * wavePoints[i].direction;
+
+            lineRenderer.SetPosition(i, pos);
+            // lineRenderer.SetPosition(2 * i + 2, pos2);
+        }
     }
 
     public void InsertWavePoint() {

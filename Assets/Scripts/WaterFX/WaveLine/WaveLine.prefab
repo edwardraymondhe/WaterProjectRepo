@@ -81,8 +81,8 @@ LineRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 07ef62fc36cd1054994cfce616f70928, type: 2}
-  - {fileID: 2100000, guid: 07ef62fc36cd1054994cfce616f70928, type: 2}
+  - {fileID: 2100000, guid: 096d8ffe1652403469e3a515011bee80, type: 2}
+  - {fileID: 2100000, guid: acb64056e759d244bb6bc6163a2d57bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,13 +112,13 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 1.6585926
-        outSlope: 1.6585926
+        value: 0.5
+        inSlope: 0.90559465
+        outSlope: 0.90559465
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.051495016
+        outWeight: 0.1509434
       - serializedVersion: 3
         time: 1
         value: 1
@@ -185,3 +185,5 @@ MonoBehaviour:
   wavePointCount: 0
   wavePointDirection: -1
   wavePointOrigin: {fileID: 8080727148471007543}
+  waveSpeed: 2
+  waveWidth: 0.4

@@ -4,6 +4,9 @@
 	{
 		_BumpScale("Bump Scale", Range(0, 2)) = 0.2
 		_BumpMap ("Bump map", 2D) = "bump" {}
+		_CausticsScale("Caustics Scale", Float) = 0.5
+        [NoScaleOffset]_CausticMap("Caustics", 2D) = "white" {}
+        _BlendDistance("BlendDistance", Float) = 3
 	}
 	SubShader
 	{

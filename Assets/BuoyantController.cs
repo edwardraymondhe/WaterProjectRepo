@@ -2,54 +2,83 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class BuoyantController : MonoBehaviour
 {
     public Transform[] floaters;
-    public float underWaterDrag = 3f;
-    public  float underWaterAngularDrag = 1f;
+
+    public float randomForcePower = 5f;
+
+    public float underwaterDrag = 3f;
+
+    public float underwaterAngularDrag = 1f;
+
     public float airDrag = 0f;
+
     public float airAngularDrag = 0.05f;
+
+    public float waterHeight = 0.0f;
+
     public float floatingPower = 15f;
 
-    public float waterHeight = 0f;
-    Rigidbody m_Rigidbody;
-    bool underWater;
+    private Rigidbody rb;
+
     int floatersUnderwater;
-    private void Start() {
-        m_Rigidbody = GetComponent<Rigidbody>();
+
+    bool underwater;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate() {
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        floatersUnderwater = 0;
         for (int i = 0; i < floaters.Length; i++)
         {
-            float diff = floaters[i].position.y - waterHeight;
+            float difference = floaters[i].position.y - waterHeight;
 
-        if(diff < 0)
-            m_Rigidbody.AddForceAtPosition(Vector3.up * floatingPower * Mathf.Abs(diff), floaters[i].position, ForceMode.Force);
-            floatersUnderwater += 1;
-            if(!underWater)
+            // random force
+            float forceX = Random.Range(-0.2f, 0.2f);
+            float forceY = Random.Range(-2.5f, 2.5f);
+            float forceZ = Random.Range(-0.2f, 0.2f);
+            Vector3 randomForce = new Vector3(forceX, forceY, forceZ);
+
+            rb.AddForceAtPosition(randomForcePower * randomForce, floaters[i].position, ForceMode.Force);
+
+            if (difference < 0)
             {
-                underWater = true;
-                SwitchState(true);
+                rb.AddForceAtPosition(Vector3.up * floatingPower * Mathf.Abs(difference), floaters[i].position, ForceMode.Force);
+                floatersUnderwater += 1;
+                if (!underwater)
+                {
+                    underwater = true;
+                    SwitchState(true);
+                }
             }
         }
         
-        if(underWater && floatersUnderwater == 0)
+        if (underwater && floatersUnderwater == 0)
         {
-            underWater = false;
-            SwitchState(true);
+            underwater = false;
+            SwitchState(false);
         }
     }
 
     void SwitchState(bool isUnderwater)
     {
-        if(isUnderwater)
+        if (isUnderwater)
         {
-            m_Rigidbody.drag = underWaterDrag;
-            m_Rigidbody.angularDrag = underWaterAngularDrag;
-        }else{
-            m_Rigidbody.drag = airDrag;
-            m_Rigidbody.angularDrag = airAngularDrag;
+            rb.drag = underwaterDrag;
+            rb.angularDrag = underwaterAngularDrag;
+        }
+        else
+        {
+            rb.drag = airDrag;
+            rb.angularDrag = airAngularDrag;
         }
     }
 }

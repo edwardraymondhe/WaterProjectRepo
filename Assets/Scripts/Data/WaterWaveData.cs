@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MyWaterSystem.Data
 {
@@ -10,9 +11,30 @@ namespace MyWaterSystem.Data
     {
         public List<Wave> _waves = new List<Wave>();
         public int randomSeed = 3234;
+
         public BasicWaves _basicWaveSettings = new BasicWaves(1.5f, 45.0f, 5.0f);
         [SerializeField]
         public bool _init = false;
+
+        public void SetWaveNum(int num)
+        {
+            _basicWaveSettings.numWaves = num;
+        }
+
+        public void SetAmp(float amp)
+        {
+            _basicWaveSettings.amplitude = amp;
+        }
+
+        public void SetDir(float dir)
+        {
+            _basicWaveSettings.direction = dir;
+        }
+
+        public void SetLen(float len)
+        {
+            _basicWaveSettings.wavelength = len;
+        }
     }
 
     [System.Serializable]

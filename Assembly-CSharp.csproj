@@ -36,9 +36,26 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_Bar.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_Element.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_ElementAnimation.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_ElementAnimationPreset.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_ElementAnimator.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_ElementAudio.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_ElementAudioClip.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_ElementAudioPreset.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_Menu.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_OptionList.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_SceneTransition.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_SwitchToggle.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_Tab.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_TabGroup.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_TabWindow.cs" />
+     <Compile Include="Assets\Art Assets\Quantum UI\Scripts\QUI_Window.cs" />
      <Compile Include="Assets\BoatController.cs" />
      <Compile Include="Assets\BuoyantController.cs" />
      <Compile Include="Assets\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Boat.cs" />
      <Compile Include="Assets\Scripts\BoatttController.cs" />
      <Compile Include="Assets\Scripts\Data\WaterResourcesData.cs" />
      <Compile Include="Assets\Scripts\Data\WaterWaveData.cs" />
@@ -50,36 +67,98 @@
      <Compile Include="Assets\Scripts\Physics\Engine.cs" />
      <Compile Include="Assets\Scripts\Physics\PhysicsSimulationController.cs" />
      <Compile Include="Assets\Scripts\Reflection.cs" />
+     <Compile Include="Assets\Scripts\RenderPass\PostProcessingFeature.cs" />
+     <Compile Include="Assets\Scripts\RenderPass\WakePass.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
      <Compile Include="Assets\Scripts\WaterFX\WaterSystemFeature.cs" />
      <Compile Include="Assets\Scripts\WaterFX\WaveLine\WaveLine.cs" />
      <Compile Include="Assets\Scripts\WaterFX\WaveLine\WaveLineManager.cs" />
      <Compile Include="Assets\Scripts\WaterFX\WaveLine\WaveTester.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
+     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
      <Compile Include="Assets\Tut\PhysicsHelper.cs" />
      <Compile Include="Assets\Tut\WaterBoat.cs" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Shaders\UI\UIPanelFade.shader" />
+     <None Include="Assets\Shaders\WaterWake.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\Shaders\Water.shader" />
+     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
      <None Include="Assets\Scripts\WaterFX\WaterFXShader.shader" />
+     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+     <None Include="Assets\Art Assets\Quantum UI\Fonts\Montserrat\OFL.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
      <None Include="Assets\Shaders\Ocean.shader" />
      <None Include="Assets\Shaders\ShowMainTex.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\Shaders\BasicAO.shader" />
      <None Include="Assets\Shaders\Vegetation\Vegetation.hlsl" />
      <None Include="Assets\Shaders\Skybox-Procedural-Universal.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
      <None Include="Assets\Shaders\Vegetation\LODCrossfade.hlsl" />
      <None Include="Assets\Shaders\Gerstner.hlsl" />
      <None Include="Assets\Shaders\WaterReflection.hlsl" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\Shaders\UI\NewUnlitShader.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\Shaders\WaterCommon.hlsl" />
      <None Include="Assets\Shaders\Vegetation\LWVegetationShader.shader" />
      <None Include="Assets\Shaders\WaterUtilities.hlsl" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\Shaders\FFTCS.compute" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\Shaders\Vegetation\ShadowPassVegetation.hlsl" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\Shaders\CustomLighting.hlsl" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\Shaders\Vegetation\InputSurfaceVegetation.hlsl" />
+     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
      <None Include="Assets\Shaders\WaterInput.hlsl" />
      <None Include="Assets\Shaders\Blocker.shader" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\Shaders\HeightFog.hlsl" />
+     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Edward/Tool/Media/GameEngine/Unity/Editor/2019.4.22f1c1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -617,6 +696,9 @@
     <Reference Include="Unity.Timeline.Editor">
         <HintPath>D:/Edward/GameDev/Unity/3D/Project/WaterProjectRepo/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+        <HintPath>D:/Edward/GameDev/Unity/3D/Project/WaterProjectRepo/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.CacheServer">
         <HintPath>D:/Edward/GameDev/Unity/3D/Project/WaterProjectRepo/Library/ScriptAssemblies/UnityEditor.CacheServer.dll</HintPath>
     </Reference>
@@ -674,6 +756,9 @@
     <Reference Include="Unity.Mathematics">
         <HintPath>D:/Edward/GameDev/Unity/3D/Project/WaterProjectRepo/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+        <HintPath>D:/Edward/GameDev/Unity/3D/Project/WaterProjectRepo/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Addressables">
         <HintPath>D:/Edward/GameDev/Unity/3D/Project/WaterProjectRepo/Library/ScriptAssemblies/Unity.Addressables.dll</HintPath>
     </Reference>
@@ -694,12 +779,6 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>D:/Edward/GameDev/Unity/3D/Project/WaterProjectRepo/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-        <HintPath>D:/Edward/GameDev/Unity/3D/Project/WaterProjectRepo/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-        <HintPath>D:/Edward/GameDev/Unity/3D/Project/WaterProjectRepo/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

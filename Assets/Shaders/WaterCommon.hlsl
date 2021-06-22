@@ -40,7 +40,7 @@ struct WaterVertexOutput // fragment struct
 float WaterTextureDepth(float3 posWS)
 {
     return (1 - SAMPLE_TEXTURE2D_LOD(_WaterDepthMap, sampler_WaterDepthMap_linear_clamp, posWS.xz * 0.002 + 0.5, 1).r) *
-         _Visibility;
+        _Visibility;
 }
 
 float3 WaterDepth(float3 posWS, half4 additionalData, half2 screenUVs) // x = seafloor depth, y = water depth
@@ -105,14 +105,15 @@ WaterVertexOutput WaveVertexOperations(WaterVertexOutput input)
     input.normal = wave.normal.xzy;
     input.posWS += wave.position;
 
-    // 运动船的水波
-    // half4 waterFX = SAMPLE_TEXTURE2D_LOD(_WaterFXMap, sampler_ScreenTextures_linear_clamp, screenUV.xy, 0);
-    // input.posWS.y += waterFX.w * 2 - 1;
+    //运动船的水波
+    half4 waterFX = SAMPLE_TEXTURE2D_LOD(_WakeMap, sampler_ScreenTextures_linear_clamp, screenUV.xy, 0);
+    input.posWS.y += waterFX.w * 2 - 1;
 
     //计算SV_POSITION,UV和视角向量
     input.clipPos = TransformWorldToHClip(input.posWS);
     input.shadowCoord = ComputeScreenPos(input.clipPos);
     input.viewDir = SafeNormalize(_WorldSpaceCameraPos - input.posWS);
+    input.originalPos = screenUV.xyz;
 
     // Additional data
     input.additionalData = AdditionalData(input.posWS, wave);
@@ -124,11 +125,6 @@ WaterVertexOutput WaveVertexOperations(WaterVertexOutput input)
     return input;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//               	   Vertex and Fragment functions                         //
-///////////////////////////////////////////////////////////////////////////////
-
-// Vertex: Used for Standard non-tessellated water
 WaterVertexOutput WaterVertex(WaterVertexInput v)
 {
     WaterVertexOutput o = (WaterVertexOutput)0;
@@ -144,13 +140,13 @@ WaterVertexOutput WaterVertex(WaterVertexInput v)
     return o;
 }
 
-// Fragment for water
 half4 WaterFragment(WaterVertexOutput IN) : SV_Target
 {
     UNITY_SETUP_INSTANCE_ID(IN);
-    
+
+    half4 wake = SAMPLE_TEXTURE2D(_WakeMap, sampler_ScreenTextures_linear_clamp, IN.originalPos.xy);
     Light mainLight = GetMainLight(TransformWorldToShadowCoord(IN.posWS));
-    
+
     half3 screenUV = IN.shadowCoord.xyz / IN.shadowCoord.w;
 
     float3 depth = WaterDepth(IN.posWS, IN.additionalData, screenUV.xy);
@@ -158,16 +154,16 @@ half4 WaterFragment(WaterVertexOutput IN) : SV_Target
     half depthMulti = 1 / _Visibility;;
 
     // 白沫
-    half3 foamMap = SAMPLE_TEXTURE2D(_FoamMap, sampler_FoamMap,  IN.uv.zw).rgb;
+    half3 foamMap = SAMPLE_TEXTURE2D(_FoamMap, sampler_FoamMap, IN.uv.zw).rgb;
     //浪尖白沫
     //half waveFoam = saturate((0.3+IN.posWS.y) / _MaxWaveHeight);
     half waveFoam = 0;
     //岸边白沫
     half edgeFoam = saturate(0.75 - depth.x * 0.3) * depthEdge;
-    half foamBlendMask = max(waveFoam, edgeFoam);
+    half foamBlendMask = max(max(waveFoam, edgeFoam), wake.r * 2);
     half3 foamBlend = SAMPLE_TEXTURE2D(_ScatteringRamp, sampler_ScatteringRamp, half2(foamBlendMask, 0.66)).rgb;
     half foamMask = saturate(length(foamMap * foamBlend) * 1.5 - 0.1 + saturate(1 - depth.x * 4) * 0.5);
-    half3 foam = foamMask.xxx * (mainLight.shadowAttenuation * half3(5,5,5) + SampleSH(IN.normal));
+    half3 foam = foamMask.xxx * (mainLight.shadowAttenuation * half3(5, 5, 5) + SampleSH(IN.normal));
 
     //扭曲效果
     half2 distortion = screenUV.xy + DistortionUVs(depth.x, IN.normal);
@@ -176,21 +172,21 @@ half4 WaterFragment(WaterVertexOutput IN) : SV_Target
     distortion = depth.x < 0 ? screenUV.xy : distortion;
     depth.x = depth.x < 0 ? d : depth.x;
 
-    half fresnelTerm = FresnelTerm(IN.normal, IN.viewDir.xyz);    
+    half fresnelTerm = FresnelTerm(IN.normal, IN.viewDir.xyz);
     // 加入了BumpMap噪声后进行计算
     half2 r_UV = screenUV.xy * _ScreenParams.xy * _BumpMap_TexelSize.xy;
     float3 r_Texture = SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, r_UV).xyz * 2 - 1;
     float3 r_light = IN.posWS + r_Texture.xzy * 2.5;
     Light r_mainLight = GetMainLight(TransformWorldToShadowCoord(r_light));
-    
+
     //阴影信息
     half shadow = r_mainLight.shadowAttenuation;
 
     //使用surfaceMap对法向量进行扰动，从而产生更精细的法线效果
-    IN.normal = SurfaceNormal(IN.normal,IN.uv.xy,IN.uv.zw,depth.x);
+    IN.normal = SurfaceNormal(IN.normal, IN.uv.xy, IN.uv.zw, depth.x);
 
     //计算高光
-    half3 spec = CalculateSpecular(mainLight,IN.viewDir,IN.normal) * shadow;
+    half3 spec = CalculateSpecular(mainLight, IN.viewDir, IN.normal) * shadow;
 
     //计算散射颜色
     half3 sss = ScatterColor(depth.x * depthMulti);
@@ -203,19 +199,22 @@ half4 WaterFragment(WaterVertexOutput IN) : SV_Target
 
     //计算光照
     half3 lighting = clamp(reflection + spec, 0, 1024) * depthEdge;
-    
+
     half3 diffuse = absorption + sss;
     half3 comp = lighting + diffuse;
 
-    
+    //焦散
+    float3 caustics = WaterCaustics(IN.posWS, depth);
+
 
     comp = lerp(comp, foam, foamMask);
-    
+
     //return half4(absorption, 1);
     //return half4(foam, 1);
     //return half4(lighting, 1);
     //return half4(sss, 1);
     //return half4(mainLight.color, 1);
+    return half4(caustics+comp,1);
     return half4(comp, 1);
 }
 

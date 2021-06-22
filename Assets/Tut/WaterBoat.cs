@@ -14,24 +14,16 @@ public class WaterBoat : MonoBehaviour
     public float MaxSpeed = 10f;
     public float Drag = 0.1f;
     public float RotateSpeed = 50f;
+    public float height = 2f;
 
     //used Components
     protected Rigidbody Rigidbody;
-    protected Quaternion StartRotation;
     protected ParticleSystem ParticleSystem;
-    protected Camera Camera;
-
-    //internal Properties
-    protected Vector3 CamVel;
-
-
 
     public void Awake()
     {
         ParticleSystem = GetComponentInChildren<ParticleSystem>();
         Rigidbody = GetComponent<Rigidbody>();
-        StartRotation = Motor.localRotation;
-        Camera = Camera.main;
     }
 
     public void FixedUpdate()
@@ -77,8 +69,9 @@ public class WaterBoat : MonoBehaviour
         //Camera.transform.LookAt(transform.position + transform.forward * 6f + transform.up * 2f);
         //Camera.transform.position = Vector3.SmoothDamp(Camera.transform.position, transform.position + transform.forward * -8f + transform.up * 2f, ref CamVel, 0.05f);
 
+        // Fake sailing(before adding buoyant)
         // Vector3 pos = transform.position;
-        // transform.position = new Vector3(pos.x, 2f, pos.z);
+        // transform.position = new Vector3(pos.x, height, pos.z);
     }
 
     public static void ApplyForceToReachVelocity(Rigidbody rigidbody, Vector3 velocity, float force = 1, ForceMode mode = ForceMode.Force)
