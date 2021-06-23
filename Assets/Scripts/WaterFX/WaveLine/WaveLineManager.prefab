@@ -28,6 +28,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 7691658903966949508}
   - {fileID: 8220566397253955261}
   - {fileID: 8220566396715735769}
   m_Father: {fileID: 0}
@@ -50,6 +51,36 @@ MonoBehaviour:
   - {fileID: 8220566397253955260}
   wavePointSpawnSpan: 2
   currentCounter: 0
+--- !u!1 &6484615843886095594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7691658903966949508}
+  m_Layer: 0
+  m_Name: WavePointOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7691658903966949508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6484615843886095594}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 158139537015330480}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &158139536248001023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,7 +96,7 @@ PrefabInstance:
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
@@ -119,6 +150,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069863, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
+      propertyPath: wavePointOrigin
+      value: 
+      objectReference: {fileID: 6484615843886095594}
+    - target: {fileID: 8080727149281069863, guid: 48f8f58f6857c37499cb9d4edc7592d4,
+        type: 3}
       propertyPath: wavePointDirection
       value: 1
       objectReference: {fileID: 0}
@@ -157,7 +193,7 @@ PrefabInstance:
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8080727149281069862, guid: 48f8f58f6857c37499cb9d4edc7592d4,
         type: 3}
@@ -209,6 +245,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8080727149281069863, guid: 48f8f58f6857c37499cb9d4edc7592d4,
+        type: 3}
+      propertyPath: wavePointOrigin
+      value: 
+      objectReference: {fileID: 6484615843886095594}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48f8f58f6857c37499cb9d4edc7592d4, type: 3}
 --- !u!4 &8220566397253955261 stripped

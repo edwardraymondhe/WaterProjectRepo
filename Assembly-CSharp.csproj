@@ -56,7 +56,6 @@
      <Compile Include="Assets\BuoyantController.cs" />
      <Compile Include="Assets\CameraController.cs" />
      <Compile Include="Assets\Scripts\Boat.cs" />
-     <Compile Include="Assets\Scripts\BoatttController.cs" />
      <Compile Include="Assets\Scripts\Data\WaterResourcesData.cs" />
      <Compile Include="Assets\Scripts\Data\WaterWaveData.cs" />
      <Compile Include="Assets\Scripts\Depth.cs" />
@@ -71,6 +70,7 @@
      <Compile Include="Assets\Scripts\RenderPass\WakePass.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
+     <Compile Include="Assets\Scripts\WaterFX\BoatFoamGenerator.cs" />
      <Compile Include="Assets\Scripts\WaterFX\WaterSystemFeature.cs" />
      <Compile Include="Assets\Scripts\WaterFX\WaveLine\WaveLine.cs" />
      <Compile Include="Assets\Scripts\WaterFX\WaveLine\WaveLineManager.cs" />
@@ -109,8 +109,8 @@
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
-     <Compile Include="Assets\Tut\PhysicsHelper.cs" />
-     <Compile Include="Assets\Tut\WaterBoat.cs" />
+     <Compile Include="Assets\UI.cs" />
+     <Compile Include="Assets\WaterBoat.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Shaders\UI\UIPanelFade.shader" />

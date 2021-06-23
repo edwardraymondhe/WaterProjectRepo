@@ -9824,8 +9824,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4368127480874822}
   - component: {fileID: 198274553643828358}
-  - component: {fileID: 8563991504424932565}
   - component: {fileID: 199967527911923330}
+  - component: {fileID: 7135345885480746099}
   m_Layer: 9
   m_Name: FoamTrail_bow
   m_TagString: Untagged
@@ -9841,7 +9841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371637880153344}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0.14293614}
+  m_LocalPosition: {x: 3.53, y: 0, z: 0.14293614}
   m_LocalScale: {x: 1.0000001, y: 1.0000004, z: 1.0000001}
   m_Children: []
   m_Father: {fileID: 4603238648617514}
@@ -14523,21 +14523,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &8563991504424932565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1371637880153344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b340a95f59c7d4f4c80dc5c0a3df1f69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boatTransform: {fileID: 4534809148113994}
-  ps: {fileID: 198274553643828358}
-  waterLevel: 0
 --- !u!199 &199967527911923330
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -14558,7 +14543,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ee96632ff6f240a4abd170eb8fc011de, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14602,6 +14586,21 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &7135345885480746099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371637880153344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee5fb2b854750148b09dc8027b492bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boatTransform: {fileID: 0}
+  ps: {fileID: 0}
+  waterLevel: 0
 --- !u!1 &1489463026464572
 GameObject:
   m_ObjectHideFlags: 0
@@ -19312,7 +19311,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d84597acd7ada4ababbf75fc492460d5, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19366,8 +19364,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4208046336891554}
   - component: {fileID: 198319431785470242}
-  - component: {fileID: 6323883738713619667}
   - component: {fileID: 199879863142729572}
+  - component: {fileID: 5631524027430113662}
   m_Layer: 9
   m_Name: FoamTrail_stern
   m_TagString: Untagged
@@ -24065,21 +24063,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &6323883738713619667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1500772317517024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b340a95f59c7d4f4c80dc5c0a3df1f69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boatTransform: {fileID: 4534809148113994}
-  ps: {fileID: 198319431785470242}
-  waterLevel: 0
 --- !u!199 &199879863142729572
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -24100,7 +24083,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: ee96632ff6f240a4abd170eb8fc011de, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24144,6 +24126,21 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &5631524027430113662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500772317517024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee5fb2b854750148b09dc8027b492bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boatTransform: {fileID: 0}
+  ps: {fileID: 0}
+  waterLevel: 0
 --- !u!1 &1553288845585282
 GameObject:
   m_ObjectHideFlags: 0
@@ -24155,8 +24152,6 @@ GameObject:
   - component: {fileID: 4534809148113994}
   - component: {fileID: 54710712322113256}
   - component: {fileID: 64258884862185400}
-  - component: {fileID: 114129291822198474}
-  - component: {fileID: 114571606569623246}
   m_Layer: 11
   m_Name: _BoatBase
   m_TagString: boat
@@ -24209,46 +24204,10 @@ MeshCollider:
   m_Material: {fileID: 13400000, guid: bd4c82ff9a8164f5c96a49347c431b99, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 1
-  m_CookingOptions: 14
+  m_CookingOptions: 30
   m_Mesh: {fileID: 2899951614431091848, guid: a362db008c5274e03bf6f3d2387cf617, type: 3}
---- !u!114 &114129291822198474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553288845585282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e14db15b85a74d2288a792b27ee0fa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boatRenderer: {fileID: 23139903168929634}
-  engineRenderer: {fileID: 3607957023957793550}
-  engine: {fileID: 4301521246144889673}
-  cam: {fileID: 2365855355768168390}
---- !u!114 &114571606569623246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553288845585282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d5ac9593b59d4847815e4528b52a6d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buoyancyType: 3
-  density: 513.98334
-  volume: 6.6150007
-  voxelResolution: 0.3
-  centerOfMass: {x: 0, y: -0.15, z: -0.9}
-  waterLevelOffset: 0.25
-  colliders:
-  - {fileID: 64258884862185400}
 --- !u!1 &1610670695541802
 GameObject:
   m_ObjectHideFlags: 0
@@ -24258,7 +24217,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4603238648617514}
-  - component: {fileID: 114135153223430406}
   m_Layer: 11
   m_Name: ParticleFX
   m_TagString: Untagged
@@ -24283,23 +24241,6 @@ Transform:
   m_Father: {fileID: 4534809148113994}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114135153223430406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1610670695541802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e8a6257865674c219fc5cdb6145cc12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wakes: []
-  wakePrefab:
-    m_AssetGUID: 
-  genDistance: 0.5
-  maxAge: 5
 --- !u!1 &1852268228170652
 GameObject:
   m_ObjectHideFlags: 0
@@ -24326,7 +24267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1852268228170652}
   m_LocalRotation: {x: 0.27059805, y: 0.65328157, z: -0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: 0.7, y: -0.1, z: 0.2}
+  m_LocalPosition: {x: 2.4, y: -0.1, z: -0.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4226103850215974}
@@ -29019,7 +28960,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d84597acd7ada4ababbf75fc492460d5, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -34063,7 +34003,6 @@ GameObject:
   - component: {fileID: 1857749394586354482}
   - component: {fileID: 1036935742331195195}
   - component: {fileID: 3607957023957793550}
-  - component: {fileID: 4301521246144889673}
   m_Layer: 0
   m_Name: Engine
   m_TagString: Untagged
@@ -34133,23 +34072,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4301521246144889673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5982248302829913771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01c46922a8ed04b0081de10e51b3762f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  engineSound: {fileID: 82633756123786494}
-  waterSound: {fileID: 82912682702107868}
-  steeringTorque: 5
-  horsePower: 30
-  enginePosition: {x: 0, y: 0.05, z: -3.31}
 --- !u!1 &7722079641781253370
 GameObject:
   m_ObjectHideFlags: 0

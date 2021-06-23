@@ -243,18 +243,22 @@ namespace MyWaterSystem
         public void SetBasicWaveDataWaveNum(Slider slider)
         {
             waveData.SetWaveNum((int)slider.value);
+            ApplyWaveChanges();
         }
         public void SetBasicWaveDataAmp(Slider slider)
         {
             waveData.SetAmp(slider.value);
+            ApplyWaveChanges();
         }
         public void SetBasicWaveDataDir(Slider slider)
         {
             waveData.SetDir(slider.value);
+            ApplyWaveChanges();
         }
         public void SetBasicWaveDataLen(Slider slider)
         {
             waveData.SetLen(slider.value);
+            ApplyWaveChanges();
         }
 
         public void ApplyWaveChanges()
